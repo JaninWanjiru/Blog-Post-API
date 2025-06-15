@@ -111,7 +111,25 @@ app.get("/posts/:id", async (req, res) => {
   }
 });
 
-
+// Update a post
+app.put("/posts/:id", async (req, res) => {
+  try {
+    const {title, content} = req.body
+    const {id} = req.params
+    const post = await client.post.update({
+      where: {
+        id
+      },
+      data: {
+          title,
+          content
+      }
+    })
+    res.status(200).json(post)
+  } catch(e) {
+    res.status(500).json({message: "Something went wrong"})
+  }
+})
 
 
 // Starting server/ Port configuration
