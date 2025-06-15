@@ -29,7 +29,7 @@ app.get("/users/:id", async (req, res) => {
     const  {id} = req.params
     const user = await client.user.findFirst({
       where: {id},
-      include: {posts: true}
+      include: {posts: true}   //"Include"- returns all the fields containing all the details of the Post model
     })
     if (user) {
       return res.status(200).json(user)
@@ -84,7 +84,7 @@ app.get("/posts", async (_req, res) => {
   try {
     const posts = await client.post.findMany({
       where: {isDeleted: false},
-      include: {user: true}
+      include: {user: true}    //"Include"- returns all the fields containing the details of the User model
     })
     res.status(200).json(posts)
   } catch (e) {
@@ -117,9 +117,7 @@ app.put("/posts/:id", async (req, res) => {
     const {title, content} = req.body
     const {id} = req.params
     const post = await client.post.update({
-      where: {
-        id
-      },
+      where: {id},
       data: {
           title,
           content
@@ -129,8 +127,21 @@ app.put("/posts/:id", async (req, res) => {
   } catch(e) {
     res.status(500).json({message: "Something went wrong"})
   }
-})
+});
 
+// Delete a given post
+app.delete("/posts/:id", async (req, res) => {
+  try {
+    const {id} = req.params
+    await client.post.update({
+      where: {id},
+      data: {isDeleted: true}
+    })
+    res.status(200).json({message: "Post deleted successfully"})
+  } catch(e) {
+    res.status(500).json({message: "Something went wrong"})
+  }
+});
 
 // Starting server/ Port configuration
 const port = process.env.PORT || 3300;
