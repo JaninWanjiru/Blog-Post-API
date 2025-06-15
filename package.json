@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "node --watch index.js",
-    "prod": "node index.js"
+    "prod": "node index.js",
+    "prisma": "prisma generate"
   },
   "keywords": [],
   "author": "",
