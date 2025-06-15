@@ -29,7 +29,7 @@ app.get("/users/:id", async (req, res) => {
     const  {id} = req.params
     const user = await client.user.findFirst({
       where: {id},
-      include: {posts: true}   //"Include"- returns all the fields containing all the details of the Post model
+      include: {posts: true}   //"Include"- gives us all the fields containing all the details of the Post model
     })
     if (user) {
       return res.status(200).json(user)
@@ -84,7 +84,7 @@ app.get("/posts", async (_req, res) => {
   try {
     const posts = await client.post.findMany({
       where: {isDeleted: false},
-      include: {user: true}    //"Include"- returns all the fields containing the details of the User model
+      include: {user: true}    //"Include"- gives us all the fields containing the details of the User model
     })
     res.status(200).json(posts)
   } catch (e) {
@@ -101,7 +101,7 @@ app.get("/posts/:id", async (req, res) => {
       where: {id},
       include: {user: true}
     })
-    if (!post || post.isDeleted) {
+    if (!post) {
       return res.status(404).json({message: "Post not found"})
     } else {
       return res.status(200).json(post)

@@ -22,7 +22,7 @@ I used **ECMAScript Modules (ESM)** syntax to keep things modern and clean.
 - One-to-many relationship between Users and Posts (one user - many posts)
 - Input validation and error handling
 
-## Setup instructions
+## Setup configurations
 #### 1. Initialize a new Node.js project
 ```bash
 npm init -y
@@ -85,7 +85,7 @@ npx prisma studio
 
 ### Users Endpoints
 
-| Method | Endpoint         | Description                                        |
+| Method | Endpoint         | Description                                       |
 |--------|------------------|---------------------------------------------------|
 | GET    | `/users`         | Fetch all users                                   |
 | GET    | `/users/:id`     | Fetch a specific user and all their posts         |
