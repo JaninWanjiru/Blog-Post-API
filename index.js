@@ -79,6 +79,18 @@ app.post("/posts", async (req, res) => {
   }
 })
 
+// Get all posts with user details for each post
+app.get("/posts", async (_req, res) => {
+  try {
+    const posts = await client.post.findMany({
+      where: {isDeleted: false},
+      include: {user: true}
+    })
+    res.status(200).json(posts)
+  } catch (e) {
+    res.status(500).json({message: "Something went wrong"})
+  }
+});
 
 
 
