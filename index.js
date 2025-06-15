@@ -9,17 +9,19 @@ app.use(express.json())
 
 app.get("/", (_req, res) => {  // A landing page of our API to test if our port configuration is working.
     res.send("<h1>You've unlocked the Blog post API</h1>")
-})
+});
 
+
+// Users Endpoints
 // Get all users
-app.get("/users", async(req, res) =>{
+app.get("/users", async(_req, res) =>{
     try {
       const users = await client.user.findMany();
       res.status(200).json(users)
     } catch (e) {
       res.status(500).json({message: "Something went wrong"})
     } 
-}) 
+}); 
 
 // Get a specific user by Id
 app.get("/users/:id", async (req, res) => {
@@ -37,7 +39,7 @@ app.get("/users/:id", async (req, res) => {
   } catch (e) {
     res.status(500).json({message: "Something went wrong"})
   }
-})
+});
 
 // Create a user
 app.post("/users", async (req, res) => {
@@ -55,7 +57,28 @@ app.post("/users", async (req, res) => {
   } catch (e) {
     res.status(500).json({message: "Something went wrong"})
   }
+});
+
+
+// Posts Endpoints
+// Create a new post
+app.post("/posts", async (req, res) => {
+  try {
+    const {title, content, userId} = req.body;
+    const newPost = await client.post.create({
+      data: {
+        title,
+        content,
+        userId
+      }
+    })
+    res.status(201).json(newPost)
+  } catch (e) {
+    console.log(e)
+    res.status(500).json({message: "Something went wrong"})
+  }
 })
+
 
 
 
