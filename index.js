@@ -93,8 +93,23 @@ app.get("/posts", async (_req, res) => {
 });
 
 
-
-
+// Get a specific post with user details for that post
+app.get("/posts/:id", async (req, res) => {
+  try {
+    const  {id} = req.params
+    const post = await client.post.findFirst({
+      where: {id},
+      include: {user: true}
+    })
+    if (!post || post.isDeleted) {
+      return res.status(404).json({message: "Post not found"})
+    } else {
+      return res.status(200).json(post)
+    }
+  } catch (e) {
+    res.status(500).json({message: "Something went wrong"})
+  }
+});
 
 
 
