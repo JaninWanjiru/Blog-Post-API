@@ -21,6 +21,24 @@ app.get("/users", async(req, res) =>{
     } 
 }) 
 
+// Get a specific user by Id
+app.get("/users/:id", async (req, res) => {
+  try {
+    const  {id} = req.params
+    const user = await client.user.findFirst({
+      where: {id},
+      include: {posts: true}
+    })
+    if (user) {
+      return res.status(200).json(user)
+    } else {
+      return res.status(404).json({message: "User not found"})
+    }
+  } catch (e) {
+    res.status(500).json({message: "Something went wrong"})
+  }
+})
+
 // Create a user
 app.post("/users", async (req, res) => {
   try {
