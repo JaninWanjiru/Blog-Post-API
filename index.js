@@ -5,9 +5,27 @@ const app = express()
 const client = new PrismaClient()
 
 
-app.get("/", (req, res) => {  // A landing page of our API to test if our port configuration is working.
+app.get("/", (_req, res) => {  // A landing page of our API to test if our port configuration is working.
     res.send("<h1>You've unlocked the Blog post API</h1>")
 })
+
+// Get all users
+app.get("/users", async(req, res) =>{
+    try {
+      const users = await client.user.findMany();
+      res.status(200).json(users)
+    } catch (e) {
+      res.status(500).json({message: "Something went wrong"})
+    }
+}) 
+
+
+
+
+
+
+
+
 
 
 // Starting server/ Port configuration
