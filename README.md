@@ -84,24 +84,36 @@ npx prisma studio
 ## API Endpoints
 
 ### Users Endpoints
+1. GET `/users` - Fetch all users.
 
-| Method | Endpoint         | Description                                       |
-|--------|------------------|---------------------------------------------------|
-| GET    | `/users`         | Fetch all users                                   |
-| GET    | `/users/:id`     | Fetch a specific user and all their posts         |
-| POST   | `/users`         | Create a new user                                 |
+![get users](./images/get%20all%20users.png)
 
-### Posts Endpoints
-| Method | Path         | Description                              | 
-|--------|--------------|------------------------------------------|
-| POST   | `/posts`     | Create new post                          |
-| GET    | `/posts`     | Get all active posts and user details    | 
-| GET    | `/posts/:id` | Get specific post and user details       |
-| PUT    | `/posts/:id` | Update post content                      |
-| DELETE | `/posts/:id` | Soft-delete a specific post given post Id|
+2. GET `/users/:id`- gets a specific user and all their posts.
 
-#### Sample Request and Response – Create User
+![get specific](./images/get%20specific%20user.png)
+
+3. GET `/users` -Creates a new user.
+
 ![user](./images/user.png)
 
-#### Sample Request and Response - Create Post
+### Posts Endpoints
+1. POST `/posts` - creates a new post.
+
 ![post](./images/post.png)
+
+2. GET `/posts` - gets all active posts and user details.
+
+![get all posts](./images/get%20all%20posts.png)
+
+3. GET `/posts/:id` - gets a specific post together with the user details.
+
+![get specific](./images/get%20specific%20post.png)
+
+4. PUT `/posts/:id` - updates the content of a post.
+
+![update post](./images/update.png)
+
+5. DELETE `/posts/:id` - deletes a specific post given the post Id.
+
+![delete post](./images/delete.png)
+
