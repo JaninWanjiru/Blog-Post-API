@@ -1,8 +1,10 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
+import dotenv from "dotenv"
 
 const app = express()
 const client = new PrismaClient()
+dotenv.config()
 
 app.use(express.json())
 
